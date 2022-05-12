@@ -15,7 +15,7 @@ var formSubmitHandler = function(event) {
         zipcodeFormEl.textContent = "";
         zipcodeInputEl.value = "";
     } else {
-      alert("Please enter a GitHub username");
+      alert("Please enter a correct 5 digit Zipcode");
     }
   };
 
