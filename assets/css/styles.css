@@ -1,0 +1,18 @@
+:root{
+    --primary-color:#ffcf40;
+    --secondary-color:  #008080;
+}
+
+
+.flex {
+    display: flex;
+}  
+
+.flex2 div {
+    flex-wrap: wrap;
+}  
+
+header {
+    background-color: var(--primary-color);
+}
+
