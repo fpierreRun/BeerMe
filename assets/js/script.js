@@ -1,50 +1,36 @@
-var zipcodeFormEl = document.querySelector("#zipcode-form");
-var zipcodeInputEl = document.querySelector("#zipcode");
+// var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=48854";
 
-var formSubmitHandler = function(event) {
-    // prevent page from refreshing
-    event.preventDefault();
-  
-    // get value from input element
-    var zipCode = zipcodeInputEl.value.trim();
-  
-    if (zipCode) {
-      getBreweries(zipCode);
-  
-      // clear old content
-        zipcodeFormEl.textContent = "";
-        zipcodeInputEl.value = "";
-    } else {
-      alert("Please enter a correct 5 digit Zipcode");
-    }
-  };
+// console.log(apiURL);
 
+var breweryContainer = document.getElementById('brewery');
+var fetchButton = document.getElementById('fetch-button');
 
-var getBreweries = function(postal_code) {
-    // format the github api url
-    var apiUrl = "https://api.openbrewerydb.org/breweries?by_postal="+ zipcode;
-    // console(apiUrl);
+function getApi() {
+  var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=48854";
 
-    // make a get request to url
-  fetch(apiUrl)
-  .then(function(response) {
-    // request was successful
-    if (response.ok) {
-      console.log(response);
-      response.json().then(function(data) {
-        console.log(data);
-        //displayRepos(data, postal_code);
-      });
-    } else {
-      alert("Error: " + response.statusText);
-    }
-  })
-  .catch(function(error) {
-    alert("Unable to connect to site");
-  });
-};
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      // Use the console to examine the response
+      console.log(data);
+      // TODO: Loop through the data and generate your HTML
+      for (var i=0; i< data.length; i++){
+        var breweryName = document.createElement("div");
+        breweryName.classList = "flex2"
+        var breweryUrl = document.createElement("a");
+
+        breweryName.textContent= data[i].name;
+        breweryUrl.textContent = data[i].website_url;
+
+        breweryContainer.append(breweryName);
+        breweryName.append(breweryUrl);
+
+      }
+    });
+}
 
 
-zipcodeFormEl.addEventListener("submit", formSubmitHandler);
-
-
+fetchButton.addEventListener('click', getApi);
+getApi();

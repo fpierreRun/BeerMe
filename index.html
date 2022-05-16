@@ -4,31 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Beer Me</title>
 </head>
 <body>
-    <section class="hero">
+    <Header class="hero">
         <div class="hero-body is-justify-content-center">
-            <p class="title is-justify-content-center">
-            Thirsty?
-            </p>
-            <p class="subtitle">
-            Find a brewery near you:
-            </p>
+            <h2 class="title is-justify-content-center">Find A Brewery Near You</h2>
+
+            <form id="zipcode-form" class="card-body">
+                <!--<p class="card-header">Search by Zipcode:</p>-->   
+                <div>  
+                <button type="submit" id="fetch-button"> <i class="material-icons">search</i> </button>          
+                <input id="zipcode" type = "text" autofocus = "true" class = "form-input" placeholder="Search by zipcode"/>
+                </div>
+            </form>
         </div>
+    </header>
+
+    <section>
+        <h2>Breweries near you</h2>
+        <div class="flex">
+            <img src="./assets/Images/BeerMe.png" />
+            <div class="flex2">
+                <h3>[Brewery Name]</h3>
+                <h4>[Location]</h4>
+            </div>
+             
+             <span class="material-icons">
+                arrow_forward_ios
+                </span>
+                
+        </div>
+        <div class="flex">
+            <div id="brewery"></div>
+
+        </div>
+        
+
     </section>
-
-    <div>
-        <form id="zipcode-form" class="card-body">
-            <h3 class="card-header">Search by Zipcode:</h3>           
-            <input id="zipcode" type = "text" autofocus = "true" class = "form-input"/>
-        <button type="submit" class="button is-warning is-outlined is-rounded">Search</button>
-        </form>
-
-    </div>
-
-<script src=""></script>
-<script src="./assets/js/script.js"></script>
+    
+    <!-- Java Script-->
+    <!--<script src=""></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
