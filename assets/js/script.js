@@ -79,4 +79,8 @@ var getApi =function(data) {
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 fetchButton.addEventListener('click', getApi);
+<<<<<<< HEAD
 //getApi();
+=======
+//getApi();
+>>>>>>> af0a1353f74adfc4c708bb86b0003a8bdacd2005
