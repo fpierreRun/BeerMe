@@ -1,41 +1,64 @@
-var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=48854";
+var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=";
 
 // console.log(apiURL);
 
 var breweryContainer = document.getElementById('brewery');
 var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
+var zipcodeInputEl = document.querySelector("#zipcode");
 
 var formSubmitHandler = function(event) {
   // prevent page from refreshing
   event.preventDefault();
 
   // get value from input element
-  var username = nameInputEl.value.trim();
+  var zipcode = zipcodeInputEl.value.trim();
 
-  if (username) {
-    getUserRepos(username);
+  if (zipcode) {
+    getBrewery(zipcode);
 
     // clear old content
-    repoContainerEl.textContent = "";
-    nameInputEl.value = "";
+    //repoContainerEl.textContent = "";
+    zipcodeInputEl.value = "";
   } else {
     alert("Please enter a GitHub username");
   }
 };
 
+var getBrewery = function(postal) {
+  // format the github api url
+  var apiUrl = requestUrl + postal;
+
+  // make a get request to url
+  fetch(apiUrl)
+    .then(function(response) {
+      // request was successful
+      if (response.ok) {
+        console.log(response);
+        response.json().then(function(data) {
+          console.log(data);
+          getApi(data, postal);
+        });
+      } else {
+        alert("Error: " + response.statusText);
+      }
+    })
+    .catch(function(error) {
+      alert("Unable to connect");
+    });
+};
 
 
 var getApi =function() {
   //var requestUrl = "https://api.openbrewerydb.org/breweries?by_city=grand_rapids&per_page=10";
 
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      // Use the console to examine the response
-      console.log(data);
+  // fetch(requestUrl)
+  //   .then(function (response) {
+  //     return response.json();
+  //   })
+  //   .then(function (data) {
+  //     // Use the console to examine the response
+  //     console.log(data);
       // TODO: Loop through the data and generate your HTML
       for (var i=0; i< data.length; i++){
         var breweryName = document.createElement("div");
@@ -56,9 +79,9 @@ var getApi =function() {
         breweryName.append(breweryUrl);
 
       }
-    })
+    //})
 };
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 fetchButton.addEventListener('click', getApi);
-getApi();
+//getApi();
