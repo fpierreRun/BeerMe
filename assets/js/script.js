@@ -8,6 +8,7 @@ var userFormEl = document.querySelector("#zipcode-form");
 var zipcodeInputEl = document.querySelector("#zipcode");
 var modalContainer = document.getElementById("modal");
 var modalBackground = document.getElementById("modal-background");
+var breweryMain = document.getElementById("brewery-main");
 
 
 
@@ -43,19 +44,29 @@ var getApi =function(data) {
   }
   
       for (var i=0; i< data.length; i++){
+        //image for div
+        var brewImage = document.createElement("img");
+        
+        //brewery name div
         var breweryName = document.createElement("div");
-        breweryName.classList = "flex2 card-header"
+        breweryName.classList = "flex2 card-content is-align-content-space-around"
 
+        //brewery address
         var breweryAddress = document.createElement("a");
         breweryAddress.classList = "card-content";
 
+        //brewery url
         var breweryUrl = document.createElement("a");
         breweryUrl.classList = "card-content card-shadow"
 
+        brewImage.classList =("card-header");
+        brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
+        
         breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
         breweryUrl.textContent = data[i].website_url;
 
+        breweryContainer.append(brewImage);
         breweryContainer.append(breweryName);
         breweryName.append(breweryAddress);
         breweryName.append(breweryUrl);
