@@ -4,8 +4,25 @@ I want to search for breweries in my area using zip codes
 So that I can quench my thirst with a locally crafted beer
 
 ## Criteria
+Use a CSS framework other than Bootstrap.
 
-There is a weather dashboard with form inputs. When the user searches for a city they are presented with the current weather and future conditions and city is added to search history. Then the user is presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, the UV index, and the 5 day forcast for that city. If the user clicks on a city from the search history then the previous conditions are shown for that city.
+Be deployed to GitHub Pages.
+
+Be interactive (i.e., accept and respond to user input).
+
+Use at least two server-side APIs.
+
+Does not use alerts, confirms, or prompts (use modals).
+
+Use client-side storage to store persistent data.
+
+Be responsive.
+
+Have a polished UI.
+
+Have a clean repository that meets quality coding standards (file structure, naming conventions, follows best practices for class/id naming conventions, indentation, quality comments, etc.).
+
+Have a quality README (with unique name, description, technologies used, screenshot, and link to deployed application).
 
 ## Built with 
 * HTML
