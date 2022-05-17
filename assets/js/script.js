@@ -6,24 +6,10 @@ var breweryContainer = document.getElementById('brewery');
 var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
 var zipcodeInputEl = document.querySelector("#zipcode");
+var modalContainer = document.getElementById("modal");
+var modalBackground = document.getElementById("modal-background");
 
-var formSubmitHandler = function(event) {
-  // prevent page from refreshing
-  event.preventDefault();
 
-  // get value from input element
-  var zipcode = zipcodeInputEl.value.trim();
-
-  if (zipcode) {
-    getBrewery(zipcode);
-
-    // clear old content
-    //repoContainerEl.textContent = "";
-    zipcodeInputEl.value = "";
-  } else {
-    alert("Please enter a GitHub username");
-  }
-};
 
 var getBrewery = function(postal) {
   // format the github api url
@@ -51,7 +37,8 @@ var getBrewery = function(postal) {
 
 var getApi =function(data) {
   if (data.length === 0) {
-    alert( 'This zipcode has no breweries!');
+    
+    modalContainer.classList = ("modal is-active");
     return;
   }
   
@@ -77,6 +64,34 @@ var getApi =function(data) {
   
 };
 
+var formSubmitHandler = function(event) {
+  // prevent page from refreshing
+  event.preventDefault();
+
+  // get value from input element
+  var zipcode = zipcodeInputEl.value.trim();
+
+  if (zipcode) {
+    getBrewery(zipcode);
+    //getApi(zipcode);
+    //getBrewery.unshift({zipcode});
+
+    // clear old content
+    //repoContainerEl.textContent = "";
+    zipcodeInputEl.value = "";
+  } else {
+    alert("Please enter a zipcode");
+  }
+}
+
+//modal
+
+$(".modal-close").click(function() {
+  $("html").removeClass("is-clipped");
+  $(this).parent().removeClass("is-active");
+});
+
+
 userFormEl.addEventListener("submit", formSubmitHandler);
 fetchButton.addEventListener('click', getApi);
-//getApi();
+
