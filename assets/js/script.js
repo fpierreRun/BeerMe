@@ -37,7 +37,7 @@ var getBrewery = function(postal) {
         console.log(response);
         response.json().then(function(data) {
           console.log(data);
-          getApi(data, postal);
+          getApi(data);
         });
       } else {
         alert("Error: " + response.statusText);
@@ -49,17 +49,12 @@ var getBrewery = function(postal) {
 };
 
 
-var getApi =function() {
-  //var requestUrl = "https://api.openbrewerydb.org/breweries?by_city=grand_rapids&per_page=10";
-
-  // fetch(requestUrl)
-  //   .then(function (response) {
-  //     return response.json();
-  //   })
-  //   .then(function (data) {
-  //     // Use the console to examine the response
-  //     console.log(data);
-      // TODO: Loop through the data and generate your HTML
+var getApi =function(data) {
+  if (data.length === 0) {
+    alert( 'This zipcode has no breweries!');
+    return;
+  }
+  
       for (var i=0; i< data.length; i++){
         var breweryName = document.createElement("div");
         breweryName.classList = "flex2 card-header"
@@ -79,7 +74,7 @@ var getApi =function() {
         breweryName.append(breweryUrl);
 
       }
-    //})
+  
 };
 
 userFormEl.addEventListener("submit", formSubmitHandler);
