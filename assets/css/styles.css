@@ -46,6 +46,10 @@ section h2 {
     font-weight: bold;
 }
 
+.card-content {
+    align-items: center;
+word-break: break-all;
+}
 
 header {
     background-color: var(--primary-color);
