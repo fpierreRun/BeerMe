@@ -37,7 +37,7 @@ Have a quality README (with unique name, description, technologies used, screens
 
 
 ## Screenshot
-![screenshot](./assets/images/screenshot.png "screenshot")
+![screenshot](./assets/Images/screenshot.png "screenshot")
 
 </p>
 
