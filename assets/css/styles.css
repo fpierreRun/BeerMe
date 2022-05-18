@@ -73,8 +73,8 @@ header h2 {
     text-align: left;
     word-break:break-all;
     width: 70%;
-    
-}
+    color: var(--primary-color);
+}    
 
 .material-icons {
     align-self: center;
