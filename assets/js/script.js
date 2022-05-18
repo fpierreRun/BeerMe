@@ -7,7 +7,7 @@ var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
 var zipcodeInputEl = document.querySelector("#zipcode");
 var modalContainer = document.getElementById("modal");
-var modalBackground = document.getElementById("modal-background");
+var modalContent = document.getElementById("modal-content");
 var breweryMain = document.getElementById("brewery-main");
 
 
@@ -27,11 +27,13 @@ var getBrewery = function(postal) {
           getApi(data);
         });
       } else {
-        alert("Error: " + response.statusText);
+        modalContainer.classList = ("modal is-active");
+    createModal();//("Error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      alert("Unable to connect");
+      modalContainer.classList = ("modal is-active");
+    createModal();//("Unable to connect");
     });
 };
 
@@ -40,6 +42,7 @@ var getApi =function(data) {
   if (data.length === 0) {
     
     modalContainer.classList = ("modal is-active");
+    createModal();
     return;
   }
   
@@ -91,9 +94,18 @@ var formSubmitHandler = function(event) {
     //repoContainerEl.textContent = "";
     zipcodeInputEl.value = "";
   } else {
-    alert("Please enter a zipcode");
+    //var error = ("Please enter a zipcode");
+    modalContainer.classList = ("modal is-active");
+    createModal();
   }
 }
+
+var createModal =function(){
+  var modalOpen = document.createElement("div");
+  modalOpen.classList = ("has-background-white modal-content box");
+  modalContainer.append(modalOpen);
+  modalOpen.textContent = test;
+};
 
 //modal
 
