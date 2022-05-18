@@ -36,9 +36,8 @@ Have a quality README (with unique name, description, technologies used, screens
 ## Website
 
 
-##
-<p align="center">
-  <img src="./assets/images/site.png" width="350"
+## Screenshot
+![screentshot](./assets/images/screenshot.png "screenshot")
 
 </p>
 
