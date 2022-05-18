@@ -34,6 +34,7 @@ Have a quality README (with unique name, description, technologies used, screens
 * Waze API
 
 ## Website
+https://fpierrerun.github.io/BeerMe/
 
 
 ## Screenshot
