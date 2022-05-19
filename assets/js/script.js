@@ -115,7 +115,6 @@ var formSubmitHandler = function(event) {
   }
 }
 
-console.log(lat, long);
 
 var createModal =function(){
   var modalOpen = document.createElement("div");
