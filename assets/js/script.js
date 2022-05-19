@@ -1,7 +1,8 @@
-var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=";
+var requestUrl = "https://api.openbrewerydb.org/breweries?by_city=";
 
 // console.log(apiURL);
 
+var zipcodes = [];
 var breweryContainer = document.getElementById('brewery');
 var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
@@ -9,6 +10,8 @@ var zipcodeInputEl = document.querySelector("#zipcode");
 var modalContainer = document.getElementById("modal");
 var modalContent = document.getElementById("modal-content");
 var breweryMain = document.getElementById("brewery-main");
+var mapContainer = document.getElementById("map");
+
 
 
 
@@ -64,6 +67,14 @@ var getApi =function(data) {
 
         brewImage.classList =("card-header");
         brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
+
+        var long = document.createElement("p");
+        long.textContent = data[i].longitude;
+        long.classList = ("is-hidden");
+
+        var lat = document.createElement("p");
+        lat.textContent=data[i].latitude;
+        lat.classList = ("is-hidden");
         
         breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
@@ -73,8 +84,12 @@ var getApi =function(data) {
         breweryContainer.append(breweryName);
         breweryName.append(breweryAddress);
         breweryName.append(breweryUrl);
+        //breweryAddress.append(lat, lon);
+        console.log(lat, long);
 
       }
+
+      
   
 };
 
@@ -88,7 +103,7 @@ var formSubmitHandler = function(event) {
   if (zipcode) {
     getBrewery(zipcode);
     //getApi(zipcode);
-    //getBrewery.unshift({zipcode});
+    zipcodes.unshift({zipcode});
 
     // clear old content
     //repoContainerEl.textContent = "";
@@ -100,12 +115,15 @@ var formSubmitHandler = function(event) {
   }
 }
 
+console.log(lat, long);
+
 var createModal =function(){
   var modalOpen = document.createElement("div");
   modalOpen.classList = ("has-background-white modal-content box");
   modalContainer.append(modalOpen);
   modalOpen.textContent = test;
 };
+
 
 //modal
 
@@ -116,5 +134,6 @@ $(".modal-close").click(function() {
 
 
 userFormEl.addEventListener("submit", formSubmitHandler);
-fetchButton.addEventListener('click', getApi);
+//fetchButton.addEventListener('click', getApi);
+
 
