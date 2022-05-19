@@ -59,10 +59,11 @@ section h2 {
 }
 
 .card-content {
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-content: center ;
     word-break: break-all;
     text-align: center;
-  
 }
 
 header {
