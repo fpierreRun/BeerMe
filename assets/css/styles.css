@@ -60,10 +60,12 @@ section h2 {
 
 .card-content {
     display: flex;
-    justify-content: center;
-    align-content: center ;
+    justify-content: left;
+    align-content: left;
     word-break: break-all;
-    text-align: center;
+    text-align: left;
+    margin-left: 50px;
+    line-height: normal;
 }
 
 header {
