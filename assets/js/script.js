@@ -65,8 +65,15 @@ var getApi =function(data) {
         breweryName.classList = "flex2 card-content is-align-content-space-around"
 
         //brewery address
-        var breweryAddress = document.createElement("a");
-        breweryAddress.classList = "card-content";
+        // var breweryAddress = document.createElement("a");
+        // breweryAddress.classList = "card-content";
+
+        var breweryAddress = document.createElement("address");
+        var street = data[i].street || "";
+        var city = data[i].city || "";
+        var state = data[i].state || "";
+        var zip = data[i].postal_code || "";
+        breweryAddress.innerHTML = `${street}<br/>${city}, ${state} ${zip}`;
 
         //brewery url
         var breweryUrl = document.createElement("a");
@@ -83,7 +90,7 @@ var getApi =function(data) {
         lat.textContent=data[i].latitude;
         lat.classList = ("is-hidden");
         
-        breweryAddress.textContent = data[i].street;
+        //breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
         breweryUrl.textContent = data[i].website_url;
 
@@ -93,6 +100,20 @@ var getApi =function(data) {
         breweryName.append(breweryUrl);
         //breweryAddress.append(lat, lon);
         console.log(lat, long);
+
+
+        // get map to show up
+        var uri = `https://waze.com/ul?ll=${
+          data[i].latitude
+        } , ${data[i].longitude} &navigate=yes`; 
+        var encoded = encodeURI(uri);
+        var mapLink = document.createElement("a");
+        mapLink.setAttribute("href", encoded);
+        mapLink.setAttribute("class", "card-link");
+        mapLink.setAttribute("target", "_blank");
+        mapLink.setAttribute("rel", "noopener noreferrer");
+        mapLink.textContent = "Map";
+        breweryName.appendChild(mapLink);
 
       }
 
@@ -143,12 +164,12 @@ var formSubmitHandler = function(event) {
 // };
 
 
-//modal
-
 $(".modal-close").click(function() {
   $("html").removeClass("is-clipped");
   $(this).parent().removeClass("is-active");
 });
+
+
 
 
 userFormEl.addEventListener("submit", formSubmitHandler);
