@@ -76,8 +76,9 @@ var getApi =function(data) {
         breweryAddress.innerHTML = `${street}<br/>${city}, ${state} ${zip}`;
 
         //brewery url
-        var breweryUrl = document.createElement("a");
+        var breweryUrl = document.createElement("p");
         breweryUrl.classList = "card-content card-shadow test"
+        
 
         brewImage.classList =("card-header");
         brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
@@ -103,6 +104,7 @@ var getApi =function(data) {
 
 
         // get map to show up
+        if(data[i].longitude !=null) {
         var uri = `https://waze.com/ul?ll=${
           data[i].latitude
         } , ${data[i].longitude} &navigate=yes`; 
@@ -114,6 +116,7 @@ var getApi =function(data) {
         mapLink.setAttribute("rel", "noopener noreferrer");
         mapLink.textContent = "Map";
         breweryName.appendChild(mapLink);
+      }
 
       }
 
