@@ -77,7 +77,7 @@ var getApi =function(data) {
 
         //brewery url
         var breweryUrl = document.createElement("p");
-        breweryUrl.classList = "card-content card-shadow test"
+        breweryUrl.classList = "card-content card-shadow link"
         
 
         brewImage.classList =("card-header");
@@ -122,7 +122,7 @@ var getApi =function(data) {
 
       $('#brewery').ready(function(){
         // Get each div
-        $('.test').each(function(){
+        $('.link').each(function(){
             // Get the content
             var str = $(this).html();
             // Set the regex string
