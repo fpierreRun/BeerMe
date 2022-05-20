@@ -76,8 +76,15 @@ var getApi =function(data) {
         breweryAddress.innerHTML = `${street}<br/>${city}, ${state} ${zip}`;
 
         //brewery url
-        var breweryUrl = document.createElement("p");
-        breweryUrl.classList = "card-content card-shadow link"
+        if(data[i].website_url !=null){
+        var breweryUrl = document.createElement("a");
+        breweryUrl.setAttribute("href", data[i].website_url);
+        breweryUrl.setAttribute("class", "card-content");
+        breweryUrl.setAttribute("target", "_blank");
+        breweryUrl.setAttribute("rel", "noopener noreferrer");
+        breweryUrl.textContent = "Website";
+       // breweryUrl.classList = "card-content card-shadow link"
+        }
         
 
         brewImage.classList =("card-header");
@@ -93,7 +100,7 @@ var getApi =function(data) {
         
         //breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
-        breweryUrl.textContent = data[i].website_url;
+        //breweryUrl.textContent = data[i].website_url;
 
         breweryContainer.append(brewImage);
         breweryContainer.append(breweryName);
@@ -104,11 +111,11 @@ var getApi =function(data) {
 
 
         // get map to show up
-        if(data[i].longitude !=null) {
-        var uri = `https://waze.com/ul?ll=${
-          data[i].latitude
-        } , ${data[i].longitude} &navigate=yes`; 
-        var encoded = encodeURI(uri);
+        //if(data[i].longitude !=null) {
+        var map = `https://www.google.com/maps/search/?api=1&query=${
+          data[i].name
+        } ${data[i].state}`;  
+        var encoded = encodeURI(map);
         var mapLink = document.createElement("a");
         mapLink.setAttribute("href", encoded);
         mapLink.setAttribute("class", "card-link");
@@ -116,7 +123,7 @@ var getApi =function(data) {
         mapLink.setAttribute("rel", "noopener noreferrer");
         mapLink.textContent = "Map";
         breweryName.appendChild(mapLink);
-      }
+      //}
 
       }
 
