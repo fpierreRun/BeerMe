@@ -1,14 +1,18 @@
-var requestUrl = "https://api.openbrewerydb.org/breweries?by_postal=";
+var requestUrl = "https://api.openbrewerydb.org/breweries?by_city=";
 
 // console.log(apiURL);
 
+var zipcodes = [];
 var breweryContainer = document.getElementById('brewery');
 var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
 var zipcodeInputEl = document.querySelector("#zipcode");
 var modalContainer = document.getElementById("modal");
-var modalBackground = document.getElementById("modal-background");
+var modalContent = document.getElementById("modal-content");
 var breweryMain = document.getElementById("brewery-main");
+var modalText = document.getElementById("text-modal");
+var mapContainer = document.getElementById("map");
+
 
 
 
@@ -27,11 +31,13 @@ var getBrewery = function(postal) {
           getApi(data);
         });
       } else {
-        alert("Error: " + response.statusText);
+        modalContainer.classList = ("modal is-active");
+    createModal();//("Error: " + response.statusText);
       }
     })
     .catch(function(error) {
-      alert("Unable to connect");
+      modalContainer.classList = ("modal is-active");
+    createModal();//("Unable to connect");
     });
 };
 
@@ -39,7 +45,14 @@ var getBrewery = function(postal) {
 var getApi =function(data) {
   if (data.length === 0) {
     
-    modalContainer.classList = ("modal is-active");
+    $("#launchModal").click(function() {
+ 
+      $(".modal").addClass("is-active"); 
+    });
+
+    $(".modal-close").click(function() {
+      $(".modal").removeClass("is-active");
+    });
     return;
   }
   
@@ -57,10 +70,18 @@ var getApi =function(data) {
 
         //brewery url
         var breweryUrl = document.createElement("a");
-        breweryUrl.classList = "card-content card-shadow"
+        breweryUrl.classList = "card-content card-shadow test"
 
         brewImage.classList =("card-header");
         brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
+
+        var long = document.createElement("p");
+        long.textContent = data[i].longitude;
+        long.classList = ("is-hidden");
+
+        var lat = document.createElement("p");
+        lat.textContent=data[i].latitude;
+        lat.classList = ("is-hidden");
         
         breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
@@ -70,8 +91,24 @@ var getApi =function(data) {
         breweryContainer.append(breweryName);
         breweryName.append(breweryAddress);
         breweryName.append(breweryUrl);
+        //breweryAddress.append(lat, lon);
+        console.log(lat, long);
 
       }
+
+      $('#brewery').ready(function(){
+        // Get each div
+        $('.test').each(function(){
+            // Get the content
+            var str = $(this).html();
+            // Set the regex string
+            var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
+            // Replace plain text links by hyperlinks
+            var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+            // Echo link
+            $(this).html(replaced_text);
+        });
+      });
   
 };
 
@@ -85,15 +122,26 @@ var formSubmitHandler = function(event) {
   if (zipcode) {
     getBrewery(zipcode);
     //getApi(zipcode);
-    //getBrewery.unshift({zipcode});
+    zipcodes.unshift({zipcode});
 
     // clear old content
     //repoContainerEl.textContent = "";
     zipcodeInputEl.value = "";
   } else {
-    alert("Please enter a zipcode");
+    //var error = ("Please enter a zipcode");
+    modalContainer.classList = ("modal is-active");
+    //createModal();
   }
 }
+
+
+// var createModal =function(){
+//   var modalOpen = document.createElement("div");
+//   modalOpen.classList = ("has-background-white modal-content box");
+//   modalContainer.append(modalOpen);
+//   modalOpen.textContent = test;
+// };
+
 
 //modal
 
@@ -104,5 +152,5 @@ $(".modal-close").click(function() {
 
 
 userFormEl.addEventListener("submit", formSubmitHandler);
-fetchButton.addEventListener('click', getApi);
+//fetchButton.addEventListener('click', getApi);
 

@@ -59,10 +59,11 @@ section h2 {
 }
 
 .card-content {
-    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-content: center ;
     word-break: break-all;
     text-align: center;
-  
 }
 
 header {
@@ -73,8 +74,8 @@ header h2 {
     text-align: left;
     word-break:break-all;
     width: 70%;
-    color: var(--primary-color);
-}    
+    
+}
 
 .material-icons {
     align-self: center;
@@ -94,4 +95,3 @@ header h2 {
     /* Support for IE. */
     font-feature-settings: 'liga';
   }
-
