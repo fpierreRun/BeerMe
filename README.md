@@ -31,7 +31,7 @@ Have a quality README (with unique name, description, technologies used, screens
 * jQuery API
 * Bulma API
 * Open Brewery API
-* Waze API
+* Google Maps API
 
 ## Website
 https://fpierrerun.github.io/BeerMe/
@@ -44,6 +44,9 @@ https://fpierrerun.github.io/BeerMe/
 
 ## Created by:
 Francis Pierre-Louis
+
 Justice Page
+
 Giovanni Claro
+
 Jason Leitz

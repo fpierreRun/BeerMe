@@ -62,24 +62,25 @@ var getApi =function(data) {
         
         //brewery name div
         var breweryName = document.createElement("div");
-        breweryName.classList = "flex2 card-content is-align-content-space-around"
+        breweryName.classList = "flex2 card-content is-align-content-space-around m-2"
 
         //brewery address
         // var breweryAddress = document.createElement("a");
         // breweryAddress.classList = "card-content";
 
-        var breweryAddress = document.createElement("address");
+        var breweryAddress = document.createElement("p");
         var street = data[i].street || "";
         var city = data[i].city || "";
         var state = data[i].state || "";
         var zip = data[i].postal_code || "";
         breweryAddress.innerHTML = `${street}<br/>${city}, ${state} ${zip}`;
+        breweryAddress.classList=("m-2");
 
         //brewery url
         if(data[i].website_url !=null){
         var breweryUrl = document.createElement("a");
         breweryUrl.setAttribute("href", data[i].website_url);
-        breweryUrl.setAttribute("class", "card-content");
+        breweryUrl.setAttribute("class", "card-link m-2");
         breweryUrl.setAttribute("target", "_blank");
         breweryUrl.setAttribute("rel", "noopener noreferrer");
         breweryUrl.textContent = "Website";
@@ -118,7 +119,7 @@ var getApi =function(data) {
         var encoded = encodeURI(map);
         var mapLink = document.createElement("a");
         mapLink.setAttribute("href", encoded);
-        mapLink.setAttribute("class", "card-link");
+        mapLink.setAttribute("class", "card-link m-2");
         mapLink.setAttribute("target", "_blank");
         mapLink.setAttribute("rel", "noopener noreferrer");
         mapLink.textContent = "Map";
