@@ -10,6 +10,7 @@ var zipcodeInputEl = document.querySelector("#zipcode");
 var modalContainer = document.getElementById("modal");
 var modalContent = document.getElementById("modal-content");
 var breweryMain = document.getElementById("brewery-main");
+var modalText = document.getElementById("text-modal");
 var mapContainer = document.getElementById("map");
 
 
@@ -44,8 +45,14 @@ var getBrewery = function(postal) {
 var getApi =function(data) {
   if (data.length === 0) {
     
-    modalContainer.classList = ("modal is-active");
-    createModal();
+    $("#launchModal").click(function() {
+ 
+      $(".modal").addClass("is-active"); 
+    });
+
+    $(".modal-close").click(function() {
+      $(".modal").removeClass("is-active");
+    });
     return;
   }
   
@@ -58,12 +65,27 @@ var getApi =function(data) {
         breweryName.classList = "flex2 card-content is-align-content-space-around"
 
         //brewery address
-        var breweryAddress = document.createElement("a");
-        breweryAddress.classList = "card-content";
+        // var breweryAddress = document.createElement("a");
+        // breweryAddress.classList = "card-content";
+
+        var breweryAddress = document.createElement("address");
+        var street = data[i].street || "";
+        var city = data[i].city || "";
+        var state = data[i].state || "";
+        var zip = data[i].postal_code || "";
+        breweryAddress.innerHTML = `${street}<br/>${city}, ${state} ${zip}`;
 
         //brewery url
+        if(data[i].website_url !=null){
         var breweryUrl = document.createElement("a");
-        breweryUrl.classList = "card-content card-shadow"
+        breweryUrl.setAttribute("href", data[i].website_url);
+        breweryUrl.setAttribute("class", "card-content");
+        breweryUrl.setAttribute("target", "_blank");
+        breweryUrl.setAttribute("rel", "noopener noreferrer");
+        breweryUrl.textContent = "Website";
+       // breweryUrl.classList = "card-content card-shadow link"
+        }
+        
 
         brewImage.classList =("card-header");
         brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
@@ -76,9 +98,9 @@ var getApi =function(data) {
         lat.textContent=data[i].latitude;
         lat.classList = ("is-hidden");
         
-        breweryAddress.textContent = data[i].street;
+        //breweryAddress.textContent = data[i].street;
         breweryName.textContent= data[i].name;
-        breweryUrl.textContent = data[i].website_url;
+        //breweryUrl.textContent = data[i].website_url;
 
         breweryContainer.append(brewImage);
         breweryContainer.append(breweryName);
@@ -87,9 +109,37 @@ var getApi =function(data) {
         //breweryAddress.append(lat, lon);
         console.log(lat, long);
 
+
+        // get map to show up
+        //if(data[i].longitude !=null) {
+        var map = `https://www.google.com/maps/search/?api=1&query=${
+          data[i].name
+        } ${data[i].state}`;  
+        var encoded = encodeURI(map);
+        var mapLink = document.createElement("a");
+        mapLink.setAttribute("href", encoded);
+        mapLink.setAttribute("class", "card-link");
+        mapLink.setAttribute("target", "_blank");
+        mapLink.setAttribute("rel", "noopener noreferrer");
+        mapLink.textContent = "Map";
+        breweryName.appendChild(mapLink);
+      //}
+
       }
 
-      
+      $('#brewery').ready(function(){
+        // Get each div
+        $('.link').each(function(){
+            // Get the content
+            var str = $(this).html();
+            // Set the regex string
+            var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
+            // Replace plain text links by hyperlinks
+            var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+            // Echo link
+            $(this).html(replaced_text);
+        });
+      });
   
 };
 
@@ -111,20 +161,18 @@ var formSubmitHandler = function(event) {
   } else {
     //var error = ("Please enter a zipcode");
     modalContainer.classList = ("modal is-active");
-    createModal();
+    //createModal();
   }
 }
 
 
-var createModal =function(){
-  var modalOpen = document.createElement("div");
-  modalOpen.classList = ("has-background-white modal-content box");
-  modalContainer.append(modalOpen);
-  modalOpen.textContent = test;
-};
+// var createModal =function(){
+//   var modalOpen = document.createElement("div");
+//   modalOpen.classList = ("has-background-white modal-content box");
+//   modalContainer.append(modalOpen);
+//   modalOpen.textContent = test;
+// };
 
-
-//modal
 
 $(".modal-close").click(function() {
   $("html").removeClass("is-clipped");
@@ -132,7 +180,8 @@ $(".modal-close").click(function() {
 });
 
 
+
+
 userFormEl.addEventListener("submit", formSubmitHandler);
 //fetchButton.addEventListener('click', getApi);
-
 

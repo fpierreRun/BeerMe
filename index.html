@@ -18,7 +18,7 @@
                 <!--<p class="card-header">Search by Zipcode:</p>-->   
                 <div>  
                 <button type="submit" id="fetch-button"> <i class="material-icons">search</i> </button>          
-                <input id="zipcode" type = "text" autofocus = "true" class = "form-input" placeholder="Search by zipcode"/>
+                <input id="zipcode" type = "text" autofocus = "true" class = "form-input" placeholder="Search by city"/>
                 </div>
             </form>
         </div>
@@ -50,22 +50,27 @@
         <div id="map">
 
         </div>
-        <div>
-            <div id="modal" class="modal">
+        <div id="modal" class="modal">
             <div class="modal-background"></div>
-            <div id="model-content" class="modal-content">
-                
+            <div class="modal-content">
+                <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                    <div class="content">
+                        <p id="text-modal">Please enter a City!</p>
+                    </div>
+                    </div>
+                </article>
                 </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-
             </div>
-        </div>
+            <button class="modal-close is-large" aria-label="close"></button>
+            </div>
         
     </section>
     <br>
     <section>
         <div class="flexcard">
-            <div class=card-content id="brewery"></div>
+            <div class="is-flex-wrap-wrap is-justify-content-space-around" id="brewery"></div>
 
         </div>
     </section>
