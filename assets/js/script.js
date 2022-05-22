@@ -2,23 +2,20 @@ var requestUrl = "https://api.openbrewerydb.org/breweries?by_city=";
 
 // console.log(apiURL);
 
-var zipcodes = [];
+var cities = [];
 var breweryContainer = document.getElementById('brewery');
 var fetchButton = document.getElementById('fetch-button');
 var userFormEl = document.querySelector("#zipcode-form");
-var zipcodeInputEl = document.querySelector("#zipcode");
+var cityInputEl = document.querySelector("#city");
 var modalContainer = document.getElementById("modal");
 var modalContent = document.getElementById("modal-content");
 var breweryMain = document.getElementById("brewery-main");
-var modalText = document.getElementById("text-modal");
 var mapContainer = document.getElementById("map");
 
 
-
-
-var getBrewery = function(postal) {
+var getBrewery = function(city) {
   // format the github api url
-  var apiUrl = requestUrl + postal;
+  var apiUrl = requestUrl + city;
 
   // make a get request to url
   fetch(apiUrl)
@@ -28,21 +25,22 @@ var getBrewery = function(postal) {
         console.log(response);
         response.json().then(function(data) {
           console.log(data);
-          getApi(data);
+          getApi(data, city);
         });
       } else {
         modalContainer.classList = ("modal is-active");
-    createModal();//("Error: " + response.statusText);
+    //createModal();//("Error: " + response.statusText);
       }
     })
     .catch(function(error) {
       modalContainer.classList = ("modal is-active");
-    createModal();//("Unable to connect");
+    //createModal();//("Unable to connect");
     });
 };
 
 
 var getApi =function(data) {
+  
   if (data.length === 0) {
     
     $("#launchModal").click(function() {
@@ -55,7 +53,7 @@ var getApi =function(data) {
     });
     return;
   }
-  
+      
       for (var i=0; i< data.length; i++){
         //image for div
         var brewImage = document.createElement("img");
@@ -86,7 +84,6 @@ var getApi =function(data) {
         breweryUrl.textContent = "Website";
        // breweryUrl.classList = "card-content card-shadow link"
         }
-        
 
         brewImage.classList =("card-header");
         brewImage.setAttribute("src", "./assets/Images/BeerMe.png")
@@ -108,7 +105,8 @@ var getApi =function(data) {
         breweryName.append(breweryAddress);
         breweryName.append(breweryUrl);
         //breweryAddress.append(lat, lon);
-        console.log(lat, long);
+        //console.log(lat, long);
+        
 
 
         // get map to show up
@@ -124,8 +122,8 @@ var getApi =function(data) {
         mapLink.setAttribute("rel", "noopener noreferrer");
         mapLink.textContent = "Map";
         breweryName.appendChild(mapLink);
+        
       //}
-
       }
 
       $('#brewery').ready(function(){
@@ -149,23 +147,24 @@ var formSubmitHandler = function(event) {
   event.preventDefault();
 
   // get value from input element
-  var zipcode = zipcodeInputEl.value.trim();
+  var cityName = cityInputEl.value.trim();
 
-  if (zipcode) {
-    getBrewery(zipcode);
+  if (!isNaN(cityName)) {
+
+    modalContainer.classList = ("modal is-active");
+    return;
+    
+  } else {
+    getBrewery(cityName);
     //getApi(zipcode);
-    zipcodes.unshift({zipcode});
+    cities.unshift({cityName});
 
     // clear old content
-    //repoContainerEl.textContent = "";
-    zipcodeInputEl.value = "";
-  } else {
-    //var error = ("Please enter a zipcode");
-    modalContainer.classList = ("modal is-active");
+    cityInputEl.value = "";
+    breweryContainer.textContent = "";
     //createModal();
   }
 }
-
 
 // var createModal =function(){
 //   var modalOpen = document.createElement("div");
@@ -179,9 +178,6 @@ $(".modal-close").click(function() {
   $("html").removeClass("is-clipped");
   $(this).parent().removeClass("is-active");
 });
-
-
-
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 //fetchButton.addEventListener('click', getApi);
