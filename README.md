@@ -34,11 +34,11 @@ Have a quality README (with unique name, description, technologies used, screens
 * Google Maps API
 
 ## Website
+https://fpierrerun.github.io/BeerMe/
 
 
-##
-<p align="center">
-  <img src="./assets/images/site.png" width="350"
+## Screenshot
+![screenshot](./assets/Images/screenshot.png "screenshot")
 
 </p>
 
