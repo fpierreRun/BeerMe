@@ -3,6 +3,22 @@
     --secondary-color:  #999999;
 }
 
+header {
+    background-image: url('../images/Beer pic 1.png');
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: var(--primary-color); 
+}
+
+header h1 {
+    text-align: left;
+    word-break:break-all;
+    width: 70%;
+}
+
 .search {
     display: flex;
     justify-items: auto;
@@ -68,16 +84,7 @@ section h2 {
     line-height: normal;
 }
 
-header {
-    background-color: var(--primary-color);
-}
 
-header h2 {
-    text-align: left;
-    word-break:break-all;
-    width: 70%;
-    
-}
 
 .material-icons {
     align-self: center;
