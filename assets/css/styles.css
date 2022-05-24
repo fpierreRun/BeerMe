@@ -4,7 +4,8 @@
 }
 
 header {
-    background-image: url('../images/Beer pic 1.png');
+    background-image:url('../images/Beer pic 1.png');
+    background-color:var(--primary-color);
     background-repeat: no-repeat, repeat;
     background-size: cover;
 }
